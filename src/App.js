@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 // import Pet from "./Pet";
-import SearchParams from './SearchParams'
+import SearchParams from "./SearchParams";
 
 const App = () => {
   //   return React.createElement(
@@ -26,15 +26,15 @@ const App = () => {
   //       breed: "KNQ",
   //     })
   //   );
-    return (
+  return (
     <React.StrictMode>
-    <div>
-      <h1 id="something-important">Adopt ME!</h1>
-      {/* <Pet name="Sheru" animal="Dog" breed="Havanese" />
+      <div>
+        <h1 id="something-important">Adopt ME!</h1>
+        {/* <Pet name="Sheru" animal="Dog" breed="Havanese" />
       <Pet name="Pepper" animal="Bird" breed="Cockatiel" />
       <Pet name="Sizzer" animal="Cat" breed="KNQ" /> */}
-    <SearchParams />
-            </div>
+        <SearchParams />
+      </div>
     </React.StrictMode>
   );
 };
