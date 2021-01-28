@@ -26,14 +26,16 @@ const App = () => {
   //       breed: "KNQ",
   //     })
   //   );
-  return (
+    return (
+    <React.StrictMode>
     <div>
       <h1 id="something-important">Adopt ME!</h1>
       {/* <Pet name="Sheru" animal="Dog" breed="Havanese" />
       <Pet name="Pepper" animal="Bird" breed="Cockatiel" />
       <Pet name="Sizzer" animal="Cat" breed="KNQ" /> */}
     <SearchParams />
-    </div>
+            </div>
+    </React.StrictMode>
   );
 };
 render(<App />, document.getElementById("root"));

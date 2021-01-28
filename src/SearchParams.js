@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { ANIMALS } from "@frontendmasters/pet"
+import React, { useState, useEffect } from "react"
+import pet, { ANIMALS } from "@frontendmasters/pet"
 import useDropdown from "./useDropdown"
 
 const SearchParams = () => {
@@ -9,8 +9,18 @@ const SearchParams = () => {
     // const [breed, setBreed] = useState("")
     const [breeds, setBreeds] = useState([])
     const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS)
-    const [breed, BreedDropdown] = useDropdown("Breed", "", breeds)
+    const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds)
 
+    useEffect(() => {
+        // pet.breeds("dog").then(console.log, console.error)
+        setBreeds([]);
+        setBreed("");
+        
+        pet.breeds(animal).then(({breeds: apiBreeds}) => {
+            const breedStrings = apiBreeds.map(({ name }) => name);
+            setBreeds(breedStrings)
+        }, console.error)
+    }, [animal, setBreed, setBreeds] )
 
     return (
         <div className="search-params">
@@ -24,35 +34,37 @@ const SearchParams = () => {
                         value={location}
                         placeholder="Location" />
                 </label>
-                {/* <label htmlFor="animal">
-                    Animal
-                     <select
-                        id="animal"
-                        onChange={event => setAnimal(event.target.value)}
-                        onBlur={event => setAnimal(event.target.value)}
-                        value={animal}
-                        placeholder="Animal">
-                        <option>All</option>
-                        {
-                            ANIMALS.map(animal => <option value={animal} key={animal}>{animal}</option>)
-                        }
-                        </select>
-                </label>
-                <label htmlFor="breed">
-                    Breed
-                     <select
-                        id="breed"
-                        disabled={!breeds.length}
-                        onChange={event => setBreed(event.target.value)}
-                        onBlur={event => setBreed(event.target.value)}
-                        value={animal}
-                        placeholder="Breed">
-                        <option>All</option>
-                        {
-                            breeds.map(breedStr => <option value={breedStr} key={breedStr}>{breedStr}</option>)
-                        }
-                        </select>
-                </label> */}
+                {
+                    /* <label htmlFor="animal">
+                        Animal
+                        <select
+                            id="animal"
+                            onChange={event => setAnimal(event.target.value)}
+                            onBlur={event => setAnimal(event.target.value)}
+                            value={animal}
+                            placeholder="Animal">
+                            <option>All</option>
+                            {
+                                ANIMALS.map(animal => <option value={animal} key={animal}>{animal}</option>)
+                            }
+                            </select>
+                    </label>
+                    <label htmlFor="breed">
+                        Breed
+                        <select
+                            id="breed"
+                            disabled={!breeds.length}
+                            onChange={event => setBreed(event.target.value)}
+                            onBlur={event => setBreed(event.target.value)}
+                            value={animal}
+                            placeholder="Breed">
+                            <option>All</option>
+                            {
+                                breeds.map(breedStr => <option value={breedStr} key={breedStr}>{breedStr}</option>)
+                            }
+                            </select>
+                    </label> */
+                }
                 <AnimalDropdown />
                 <BreedDropdown />
                 <button>Submit</button>
