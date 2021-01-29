@@ -52,35 +52,6 @@ const SearchParams = () => {
             placeholder="Location"
           />
         </label>
-        {/* <label htmlFor="animal">
-                        Animal
-                        <select
-                            id="animal"
-                            onChange={event => setAnimal(event.target.value)}
-                            onBlur={event => setAnimal(event.target.value)}
-                            value={animal}
-                            placeholder="Animal">
-                            <option>All</option>
-                            {
-                                ANIMALS.map(animal => <option value={animal} key={animal}>{animal}</option>)
-                            }
-                            </select>
-                    </label>
-                    <label htmlFor="breed">
-                        Breed
-                        <select
-                            id="breed"
-                            disabled={!breeds.length}
-                            onChange={event => setBreed(event.target.value)}
-                            onBlur={event => setBreed(event.target.value)}
-                            value={animal}
-                            placeholder="Breed">
-                            <option>All</option>
-                            {
-                                breeds.map(breedStr => <option value={breedStr} key={breedStr}>{breedStr}</option>)
-                            }
-                            </select>
-                    </label> */}
         <AnimalDropdown />
         <BreedDropdown />
         <button>Submit</button>
