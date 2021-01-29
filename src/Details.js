@@ -1,5 +1,7 @@
 import React from "react";
 import pet from "@frontendmasters/pet";
+import { navigate } from "@reach/router";
+import Modal from "./Modal";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import ThemeContext from "./ThemeContext";
@@ -20,6 +22,7 @@ class Details extends React.Component {
   // }
   state = {
     loading: true,
+    showModal: false,
   };
   componentDidMount() {
     // throw new Error('s')
@@ -33,11 +36,16 @@ class Details extends React.Component {
           media: animal.photos,
           breed: animal.breeds.primary,
           loading: false,
+          url: animal.url,
         },
         console.error
       )
     );
   }
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
+
+  adopt = () => navigate(this.state.url);
+
   render() {
     // this is mostly how functional component works
     const {
@@ -48,6 +56,7 @@ class Details extends React.Component {
       media,
       breed,
       loading,
+      showModal,
     } = this.state;
     if (loading) return <h1>Loading...</h1>;
     return (
@@ -66,12 +75,21 @@ class Details extends React.Component {
               //     </button>
               // )
               ([theme]) => (
-                <button style={{ backgroundColor: theme }}>Adopt {name}</button>
+                <button onClick={this.toggleModal } style={{ backgroundColor: theme }}>Adopt {name}</button>
               )
             }
           </ThemeContext.Consumer>
 
           <p>{description}</p>
+          {showModal ? (
+            <Modal>
+              <div>
+                <h1>Would you like to adopt {name} ?</h1>
+                <button onClick={this.adopt}>Yes</button>
+                <button onClick={this.toggleModal}>No, I'm a monster </button>
+              </div>
+            </Modal>
+          ) : null}
         </div>
       </div>
     );
